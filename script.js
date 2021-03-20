@@ -59,16 +59,18 @@ $(document).ready(function () {
                 
             }
         }
-        cardPop(data);
+        
 //EDIT START
-        if (!ingData["hits"]) {
-            $(".cardCol")[0].style.display = "none";
-            $(".cardCol")[1].style.display = "none";
-            $(".cardCol")[2].style.display = "none";
-            $(".noRes").style.display="block";
+
+                if (!data["hits"]) {
+                    $(".cardCol")[0].style.display = "none";
+                    $(".cardCol")[1].style.display = "none";
+                    $(".cardCol")[2].style.display = "none";
+                    $(".noRes").style.display="block";
+                }
         }
 //EDIT END
-    }
-
-
-});
+    })
+    
+    cardPop(data);
+;
