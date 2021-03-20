@@ -25,6 +25,11 @@ $(document).ready(function () {
         window.localStorage.setItem("Ingredients", ingredientsArr);
 
         sendApiRequest(ingredientsArr, dietaryRes);
+        //EDIT // SHOW RESULTS
+        $(".cardCol")[0].style.display = "block";
+        $(".cardCol")[1].style.display = "block";
+        $(".cardCol")[2].style.display = "block";
+        //END EDIT
     });
 
     async function sendApiRequest(ingredientsArr, dietaryRes) {
@@ -51,9 +56,18 @@ $(document).ready(function () {
                 $("#cardLink" + i).attr("href", cardLinkURL); // create a property path 
                 var cardImgURL = (ingData["hits"][i]["recipe"]["image"]);
                 $("#cardImg" + i).attr("src", cardImgURL); // create a property path 
+                
             }
         }
         cardPop(data);
+//EDIT START
+        if (!ingData["hits"]) {
+            $(".cardCol")[0].style.display = "none";
+            $(".cardCol")[1].style.display = "none";
+            $(".cardCol")[2].style.display = "none";
+            $(".noRes").style.display="block";
+        }
+//EDIT END
     }
 
 
