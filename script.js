@@ -46,29 +46,30 @@ $(document).ready(function () {
         let data = await response.json();
         console.log(data);
 
-        cardPop(data);
-
-        function cardPop(ingData) {
-        console.log(ingData);
-
-            if (data["hits"]) {
-
-                for (var i = 1; i < 10; i++) {
-                    $("#cardTitle" + i).text(ingData["hits"][i]["recipe"]["label"]);
-                    $("#cardInfo" + i).text(ingData["hits"][i]["recipe"]["source"]);
-                    var cardLinkURL = (ingData["hits"][i]["recipe"]["url"]);
-                    $("#cardLink" + i).attr("href", cardLinkURL); // create a property path 
-                    var cardImgURL = (ingData["hits"][i]["recipe"]["image"]);
-                    $("#cardImg" + i).attr("src", cardImgURL); // create a property path 
-                }
-
-            } else {
-                $(".cardCol")[0].style.display = "none";
-                $(".cardCol")[1].style.display = "none";
-                $(".cardCol")[2].style.display = "none";
-                $(".noRes").style.display = "block";
-            }
-
+        
+        if (data["count"]>0) {
+            cardPop(data);
+        } else {
+            $(".cardCol")[0].style.display = "none";
+            $(".cardCol")[1].style.display = "none";
+            $(".cardCol")[2].style.display = "none";
+            $(".noRes")[0].style.display = "block";
         }
 
-    });
+    }
+
+    function cardPop(ingData) {
+        console.log(ingData);
+
+        for (var i = 1; i < 10; i++) {
+            $("#cardTitle" + i).text(ingData["hits"][i]["recipe"]["label"]);
+            $("#cardInfo" + i).text(ingData["hits"][i]["recipe"]["source"]);
+            var cardLinkURL = (ingData["hits"][i]["recipe"]["url"]);
+            $("#cardLink" + i).attr("href", cardLinkURL); 
+            var cardImgURL = (ingData["hits"][i]["recipe"]["image"]);
+            $("#cardImg" + i).attr("src", cardImgURL); 
+
+        }
+    }
+
+});
